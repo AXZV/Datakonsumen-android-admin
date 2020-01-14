@@ -1,0 +1,186 @@
+page-home {
+
+// ion-title {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     padding: 0 90px 1px;
+//     width: 100%;
+//     height: 100%;
+//     text-align: center;
+// }
+
+.conten
+{
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+    // background-color: rgb(0, 185, 136);
+    ::-webkit-scrollbar{
+        display:none;
+        }
+
+}
+.menu
+{
+    padding-top: 1em;
+    // color: white;
+}
+
+
+.b1
+{
+    background-color: transparent;
+    color: white;
+    width: 30vw;
+    height: 45vw;
+    font: 5vw "Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+   
+}
+.menu1, .menu2, .menu3, .menu4
+{
+    -webkit-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+    -moz-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+    box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+
+    transition: 0.3s;
+
+    
+}
+.menu1:hover, .menu2:hover, .menu3:hover, .menu4:hover, 
+// .menu1:focus, .menu2:focus, .menu3:focus, .menu4:focus
+{
+    // background-color: rgb(100, 100, 100);
+
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+
+    -webkit-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+    -moz-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+    box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+
+    
+}
+.menu1
+{
+
+    padding: 3px;
+    border-radius: 20px;
+    border:3px solid #e84855;
+    border-bottom: 12px solid #e84855;
+    
+}
+.menu2
+{
+
+    padding: 3px;
+    border-radius: 20px;
+    border:3px solid #33b5e5;
+    border-bottom: 12px solid #33b5e5;
+}
+.menu3
+{
+    padding: 3px;
+    border-radius: 20px;
+    border:3px solid #f9dc5c;
+    border-bottom: 12px solid #f9dc5c;
+}
+.menu4
+{    
+    padding: 3px;
+    border-radius: 20px;
+    border:3px solid #00c581;
+    border-bottom: 12px solid #00c581;
+}
+.badge
+{
+    right:0;
+    position: relative;
+    background-color: #e84855;
+}
+
+.iconc1
+{
+    font-size: 25vw;
+    color: #e84855;
+}
+.textc1
+{
+    color: #e84855;
+}
+
+.iconc2
+{
+    font-size: 25vw;
+    color: #33b5e5;
+}
+.textc2
+{
+    color: #33b5e5;
+}
+
+.iconc3
+{
+    font-size: 25vw;
+    color: #f9dc5c;
+}
+.textc3
+{
+    color: #f9dc5c;
+}
+
+.iconc4
+{
+    font-size: 25vw;
+    color: #00c581
+}
+.textc4
+{
+    color: #00c581
+}
+
+///////////////////////////// SU Text ////////////////////////////////////
+.swing {
+    animation: swing ease-in-out 1s infinite alternate;
+    transform-origin: center -20px;
+    float:left;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+.swing img {
+    // border: 5px solid #f8f8f8;
+    display: block;
+}
+.swing:after{
+    content: '';
+    position: absolute;  
+    width: 20px; height: 20px;  
+    border: 1px solid #999;
+    top: -10px; left: 48%;
+    z-index: 0;
+    border-bottom: none;
+    border-right: none;
+    transform: rotate(45deg);
+}
+/* nail */
+.swing:before{
+    content: '';
+    position: absolute;
+    width: 5px; height: 5px;
+    top: -14px;left: 54%;
+    z-index: 5;
+    border-radius: 50% 50%;
+    background: #000;
+}
+ 
+@keyframes swing {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+
+
+
+// .........................
+
+  
+}

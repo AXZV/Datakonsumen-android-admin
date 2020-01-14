@@ -1,0 +1,212 @@
+
+<div class="header1"  [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+  <ion-row >
+    <ion-col >
+        <button ion-button clear class="text1" (click)="back()"  icon-start>
+            <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+        </button>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row >
+    <ion-col>
+      <h3 class="text">Financial Report of {{filterdate}}</h3>  
+      <div class="line"></div>
+      <h3 *ngIf="segment == 'graph1'" class="text2">Gross Profit</h3>  
+      <h3 *ngIf="segment == 'graph2'" class="text2">Expenditure to Third Parties</h3>
+      <h3 *ngIf="segment == 'graph3'" class="text2">Profit</h3>    
+    </ion-col>
+  </ion-row>
+
+  <ion-row >
+      <ion-col>
+              <ion-segment class="segment" [(ngModel)]="segment">
+                <ion-segment-button value="graph1" (click)="graph1()">
+                    <ion-icon class="segmenticon" name="card"></ion-icon>
+                </ion-segment-button>
+                <ion-segment-button value="graph3" (click)="graph3()">
+                    <ion-icon class="segmenticon" name="cash"></ion-icon>                         
+                </ion-segment-button>
+                <ion-segment-button value="graph2" (click)="graph2()">
+                    <ion-icon class="segmenticon" name="logo-snapchat"></ion-icon>                         
+                </ion-segment-button>
+              </ion-segment>     
+    </ion-col>
+  </ion-row>
+</div>
+
+
+<ion-content class="conten" #pageContent fullscreen >
+  <div class="cont">
+
+    <div [ngSwitch]="segment" >
+      
+      <div *ngSwitchCase="'graph1'" >
+
+        <ion-item>
+          <ion-label>Years    :</ion-label>
+          <!-- <ion-datetime (ionChange)="updateMyDate(myPicker.value)" #timePicker displayFormat="YYYY" [(ngModel)]="filterdate"></ion-datetime> -->
+          <ion-datetime class="filteryear" (ionChange)="updateMyDate($event)" #timePicker displayFormat="YYYY" [(ngModel)]="filterdate"></ion-datetime>
+        </ion-item>
+      
+          <ion-card>
+            <ion-card-header >
+              Gross Profit
+            </ion-card-header>
+            <ion-card-content>
+              <canvas #lineCanvassemester1></canvas>
+            </ion-card-content>
+          </ion-card>
+
+
+          <ion-card>
+              <ion-card-header>
+                Gross Profit
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #lineCanvassemester2></canvas>
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+              <ion-card-header>
+                  Grand Total
+              </ion-card-header>
+              <ion-card-content>
+                <h3 class="grandtotal">
+                  Rp. {{grandtotal}}
+                </h3>
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+                Average Gross Profit Every Month
+                <h3 *ngIf="filterdate < datenowYY" class="note">* Counted From January to December {{filterdate}}</h3>
+                <h3 *ngIf="datenowYY == filterdate && datenowMM != 'January'" class="note">* Counted From January to {{datenowMM}} {{filterdate}}</h3>
+                <h3 *ngIf="datenowYY == filterdate && datenowMM == 'January'" class="note">* Starting From January {{filterdate}}</h3>
+
+            </ion-card-header>
+            <ion-card-content>
+              <h3 class="grandtotal">
+                Rp. {{averageincome}}
+              </h3>
+            </ion-card-content>
+        </ion-card>
+      </div>
+
+
+<!-- /////////////////////////////////////////  SEGMENT THREE /////////////////////////////////////////// -->
+
+      <div *ngSwitchCase="'graph3'" >
+
+        <ion-item>
+          <ion-label>Years    :</ion-label>
+          <ion-datetime class="filteryear" (ionChange)="updateMyDate($event)" #timePicker displayFormat="YYYY" [(ngModel)]="filterdate"></ion-datetime>
+        </ion-item>
+      
+          <ion-card>
+            <ion-card-header >
+              Profit
+            </ion-card-header>
+            <ion-card-content>
+              <canvas #lineCanvassemester1></canvas>
+            </ion-card-content>
+          </ion-card>
+
+
+          <ion-card>
+              <ion-card-header>
+                Profit
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #lineCanvassemester2></canvas>
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+              <ion-card-header>
+                  Grand Total
+              </ion-card-header>
+              <ion-card-content>
+                <h3 class="grandtotal">
+                  Rp. {{grandtotal}}
+                </h3>
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+            <ion-card-header>
+                Average Profit Every Month
+                <h3 *ngIf="filterdate < datenowYY" class="note">* Counted From January to December {{filterdate}}</h3>
+                <h3 *ngIf="datenowYY == filterdate && datenowMM != 'January'" class="note">* Counted From January to {{datenowMM}} {{filterdate}}</h3>
+                <h3 *ngIf="datenowYY == filterdate && datenowMM == 'January'" class="note">* Starting From January {{filterdate}}</h3>
+
+            </ion-card-header>
+            <ion-card-content>
+              <h3 class="grandtotal">
+                Rp. {{averageincome}}
+              </h3>
+            </ion-card-content>
+        </ion-card>
+      </div>
+
+
+<!-- /////////////////////////////////////////  SEGMENT TWO /////////////////////////////////////////// -->
+
+      <div *ngSwitchCase="'graph2'" >
+
+          <ion-item>
+            <ion-label>Years    :</ion-label>
+            <ion-datetime class="filteryear" (ionChange)="updateMyDate($event)" #timePicker displayFormat="YYYY" [(ngModel)]="filterdate"></ion-datetime>
+          </ion-item>
+        
+            <ion-card>
+              <ion-card-header>
+                Expenditure to Third Parties
+              </ion-card-header>
+              <ion-card-content>
+                <canvas #lineCanvassemester1></canvas>
+              </ion-card-content>
+            </ion-card>
+  
+  
+            <ion-card>
+                <ion-card-header>
+                  Expenditure to Third Parties
+                </ion-card-header>
+                <ion-card-content>
+                  <canvas #lineCanvassemester2></canvas>
+                </ion-card-content>
+            </ion-card>
+  
+            <ion-card>
+                <ion-card-header>
+                    Grand Total
+                </ion-card-header>
+                <ion-card-content>
+                  <h3 class="grandtotal">
+                    Rp. {{grandtotal}}
+                  </h3>
+                </ion-card-content>
+            </ion-card>
+  
+            <ion-card>
+              <ion-card-header>
+                  Average Monthly Expenditure
+                  <h3 *ngIf="filterdate < datenowYY" class="note">* Counted From January to December {{filterdate}}</h3>
+                  <h3 *ngIf="datenowYY == filterdate && datenowMM != 'January'" class="note">* Counted From January to {{datenowMM}} {{filterdate}}</h3>
+                  <h3 *ngIf="datenowYY == filterdate && datenowMM == 'January'" class="note">* Starting From January {{filterdate}}</h3>
+  
+              </ion-card-header>
+              <ion-card-content>
+                <h3 class="grandtotal">
+                  Rp. {{averageincome}}
+                </h3>
+              </ion-card-content>
+          </ion-card>
+        </div>
+
+    </div>
+  </div>
+</ion-content>

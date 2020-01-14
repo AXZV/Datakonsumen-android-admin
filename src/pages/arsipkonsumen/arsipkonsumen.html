@@ -1,0 +1,866 @@
+
+<!-- // ==================================================================================================== -->
+<!-- // =================================== Header Mode Normal ============================================= -->
+
+  <div class="header1" *ngIf="divstatus == 'modenormal'" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent" >
+    <div class="headnonsearch"> 
+    <ion-row >
+        <ion-col >
+            <button ion-button clear class="text1" (click)="navhome()"  icon-start>
+                <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+            </button>
+            <button ion-button round small (click)="navaddtask()" color="light" class="text_1">Add Data</button>
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top:1%; padding-bottom:2%;" >
+        <ion-col>
+          <h3 class="text">Consumer Archive</h3> 
+          <div class="line"></div>
+          <h3 *ngIf="segment == 'graph1'" class="text234">Own Work</h3>  
+          <h3 *ngIf="segment == 'graph2'" class="text234">Third Party Work</h3>  
+        </ion-col>
+      </ion-row>
+      <ion-row >
+            <ion-col>
+                    <ion-segment class="segment" [(ngModel)]="segment">
+                      <ion-segment-button value="graph1" (click)="graph1()">
+                          <ion-icon class="segmenticon" name="filing"></ion-icon>
+                      </ion-segment-button>
+                      <ion-segment-button value="graph2" (click)="graph2()">
+                          <ion-icon class="segmenticon" name="logo-snapchat"></ion-icon>                         
+                      </ion-segment-button>
+                    </ion-segment>     
+          </ion-col>
+        </ion-row>
+    </div> 
+      <div class="searchbar" *ngIf="segment == 'graph1' && dataisnull == false"  [scrollHide]="headerScrollConfig2" [scrollContent]="pageContent">
+          <ion-row>
+              <ion-col>
+                  <ion-searchbar debounce="500" [(ngModel)]="terms" animated showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+              </ion-col>
+          </ion-row>
+      </div>
+      <div class="searchbar" *ngIf="segment == 'graph2' && dataisnull == false"  [scrollHide]="headerScrollConfig2" [scrollContent]="pageContent">
+            <ion-row>
+                <ion-col>
+                    <ion-searchbar debounce="500" [(ngModel)]="terms2" animated showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+                </ion-col>
+            </ion-row>
+        </div>
+  </div>
+
+<!-- // ==================================== Header Mode Edit ============================================= -->
+
+<div class="header1" *ngIf="divstatus == 'modeedit'" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent" >
+  <ion-row >
+    <ion-col >
+        <button ion-button clear class="text1" (click)="modenormal()"  icon-start>
+            <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+        </button>
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-top:1%;" >
+    <ion-col>
+      <h3 class="text">Edit Data</h3> 
+      <p class="textheadeditchild1">Id Konsumen {{dataedit.id_konsumen}}</p> 
+    </ion-col>
+  </ion-row>
+</div>
+
+<!-- // ==================================== Header Mode Status ============================================= -->
+<div class="header2" *ngIf="divstatus == 'modeeditstatus'" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent" >
+  <ion-row >
+    <ion-col >
+        <button ion-button clear class="text2" (click)="modenormal()"  icon-start>
+            <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+        </button>
+    </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col>
+      <h3 class="text22">Edit Status</h3> 
+      <p class="textheadeditchild2">Id Konsumen {{dataedit.id_konsumen}}</p> 
+    </ion-col>
+    <ion-col *ngIf="segment == 'graph1'">
+        <button style="background-color:transparent;" (click)="transferjob(dataedit.id_konsumen, dataedit.status)">
+            <img class="textyy" height="40px" src="../assets/imgs/transfer.png"/> 
+        </button>
+    </ion-col>
+    <ion-col *ngIf="segment == 'graph2'">
+        <button style="background-color:transparent;" (click)="transferjob2(dataedit.id_konsumen, dataedit.status)">
+            <img class="textyy" height="40px" src="../assets/imgs/transfer.png"/> 
+        </button>
+    </ion-col>
+  </ion-row>
+</div>
+<!-- // ==================================== Header Detail Pembayaran ============================================= -->
+<div class="header1" *ngIf="divstatus == 'detailpembayaran' && divcheckout == false" >
+  <ion-row >
+    <ion-col >
+        <button ion-button clear class="text1" (click)="modenormal()"  icon-start>
+            <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+        </button>
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-top:1%;">
+    <ion-col>
+      <h3 class="text">Detail Pembayaran</h3> 
+      <p *ngIf="bone" class="textheadeditchild1">Id Konsumen {{dataedit.id_konsumen}}</p>
+      <p *ngIf="btwo" class="textheadeditchild1">Id Konsumen {{datadetail2}}</p>  
+    </ion-col>
+  </ion-row>
+</div>
+
+
+
+<!-- // ================================================================================================== -->
+<!-- // ======================================== Conten ================================================== -->
+<ion-content class="conten" #pageContent fullscreen >
+    <!-- <ion-content class="conten" > -->
+
+<!-- // =================================================================================================== -->
+<!-- // ===================================== Fab Mode Normal ============================================= -->
+<ion-fab right bottom *ngIf="divstatus == 'modenormal'" >
+      <button class="fabfilter" ion-fab ><ion-icon name="options"></ion-icon></button>
+      <ion-fab-list class="fabfileterlist" side="top">
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 0)" style="background-color:white;" class="fabfileterlisticon">All
+            <ion-label class="laball">Show All</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 1)" style="background-color:#ff4444;" class="fabfileterlisticon">1
+            <ion-label class="lab1">Accepted</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 2)" style="background-color:#ffbb33;" class="fabfileterlisticon">2
+            <ion-label class="lab2">Check</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 3)" style="background-color:#feef6d;" class="fabfileterlisticon">3
+            <ion-label class="lab3">Waiting</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 4)" style="background-color:#33b5e5;" class="fabfileterlisticon">4
+            <ion-label class="lab4">Process</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 5)" style="background-color:#00c581;" class="fabfileterlisticon">5
+            <ion-label class="lab5">Finished</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph1'" ion-fab (click)="status_f(stf = 6)" style="background-color:#232526; color:white" class="fabfileterlisticon">6
+            <ion-label class="lab6">Failed</ion-label>
+        </button>
+
+        <button *ngIf="segment == 'graph2'" ion-fab (click)="status_f(stf = 0)" style="background-color:white;" class="fabfileterlisticon">All
+            <ion-label class="laball">Show All</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph2'" ion-fab (click)="status_f(stf = 4)" style="background-color:#33b5e5;" class="fabfileterlisticon">1
+            <ion-label class="lab4">Process</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph2'" ion-fab (click)="status_f(stf = 5)" style="background-color:#00c581;" class="fabfileterlisticon">2
+            <ion-label class="lab5">Finished</ion-label>
+        </button>
+        <button *ngIf="segment == 'graph2'" ion-fab (click)="status_f(stf = 6)" style="background-color:#232526; color:white" class="fabfileterlisticon">3
+            <ion-label class="lab6">Failed</ion-label>
+        </button>
+        </ion-fab-list>
+  </ion-fab>
+
+
+
+<!-- // ================================================================================================ -->
+<!-- // ======================================== List Div ============================================== -->
+
+<div class="divlist">
+
+<!-- // ================================================================================================== -->
+<!-- // ===================================== List Div Normal ============================================ -->
+    <div [ngSwitch]="segment" >
+
+        <div *ngSwitchCase="'graph1'" >
+
+
+            <div *ngIf="divstatus == 'modenormal'" >
+                <div class="status_all" style="margin-top:175px !important" >
+
+                    <div *ngIf="dataisnull == true && segment == 'graph1'" class="dataisnull"  >
+                        <img class="dataisnullimage" src="../assets/imgs/mining.png"/>
+                        <h3 class="dataisnulltext">Sorry we couldn't find any data</h3> 
+                    </div>
+
+                    <ion-list class="divnormal">
+                    <ion-item-sliding *ngFor="let x of datakonsumen | search : terms ">
+                        <ion-item (click)='detaildata(x)'>
+                            <ion-grid class="list_box">               
+                                <ion-row>
+                                <ion-col text-center col-3>
+                                    <p *ngIf="x.status == 1"  style="color:#ff4444" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                    <p *ngIf="x.status == 2"  style="color:#ffbb33" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                    <p *ngIf="x.status == 3"  style="color:#feef6d" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                    <p *ngIf="x.status == 4"  style="color:#33b5e5" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                    <p *ngIf="x.status == 5"  style="color:#00c581" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                    <p *ngIf="x.status == 6"  style="color:#232526" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                </ion-col>
+                                <ion-col col-6>
+                                    <p><ion-icon name="person"></ion-icon>&ensp;&ensp;{{ x.nama_konsumen}}</p>
+                                
+                                    <p *ngIf="x.status <= 4 && x.problem_desk != null" ><ion-icon name="construct"></ion-icon>&ensp;&ensp;{{ x.problem_desk}}</p>
+                                    <p *ngIf="x.status == 5" ><ion-icon name="construct"></ion-icon>&ensp;&ensp;Pekerjaan Telah Selesai</p>
+                                    <p *ngIf="x.status == 6" ><ion-icon name="construct"></ion-icon>&ensp;&ensp;Pekerjaan Gagal Diselesaikan !</p>
+                                </ion-col>
+                                <ion-col ></ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-item>
+                        <ion-item-options side="right">
+                            <button ion-button (click)="editstatus(x)" style="background-color:#f9dc5c; color:#232526;">
+                                <ion-icon style="font-size: 30px;" name="trending-up"></ion-icon>
+                            </button>
+                            <button ion-button (click)="modeedit(x)" style="background-color:#403f4c; color:white;">
+                                <ion-icon style="font-size: 30px;" name="create"></ion-icon>
+                            </button>
+                            <button ion-button (click)="delete(x)" style="background-color:#e84855; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="trash"></ion-icon>
+                            </button>
+                            <button *ngIf="x.status == 1" ion-button (click)="changestatus(st = 2, x.id_konsumen)" style="background-color:#8cdcda; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="arrow-up"></ion-icon>
+                            </button>
+                            <button *ngIf="x.status == 2" ion-button (click)="changestatus(st = 3, x.id_konsumen)" style="background-color:#8cdcda; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="arrow-up"></ion-icon>
+                            </button>
+                            <button *ngIf="x.status == 3" ion-button (click)="changestatus(st = 4, x.id_konsumen)" style="background-color:#8cdcda; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="arrow-up"></ion-icon>
+                            </button>
+                            <button *ngIf="x.status == 4" ion-button (click)="statusfinished2(x)" style="background-color:#8cdcda; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="arrow-up"></ion-icon>
+                            </button>
+                            <button *ngIf="x.status == 5" ion-button (click)="printinvoice(x)" style="background-color:#8bd8bd; color:#232526;">
+                            <ion-icon style="font-size: 30px;" name="print"></ion-icon>
+                            </button>
+                        </ion-item-options>
+                    </ion-item-sliding>  
+                    </ion-list>
+                    <div class="bottomspace" ></div>
+                </div>
+
+            </div>
+
+        </div> 
+        <div *ngSwitchCase="'graph2'">
+
+                <div *ngIf="divstatus == 'modenormal'" >
+                        <div class="status_all" style="margin-top:175px !important" >
+
+                            <div *ngIf="dataisnull == true && segment == 'graph2'" class="dataisnull"  >
+                                <img class="dataisnullimage" src="../assets/imgs/mining.png"/>
+                                <h3 class="dataisnulltext">Sorry we couldn't find any data</h3> 
+                            </div>
+
+                            <ion-list class="divnormal">
+                            <ion-item-sliding *ngFor="let x of datakonsumen2 | search : terms2 ">
+                                <ion-item (click)='detaildata(x)'>
+                                    <ion-grid class="list_box">               
+                                        <ion-row>
+                                        <ion-col text-center col-3>
+                                            <p *ngIf="x.status == 4"  style="color:#33b5e5" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                            <p *ngIf="x.status == 5"  style="color:#00c581" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                            <p *ngIf="x.status == 6"  style="color:#232526" class="nokonsumen">{{ x.no_konsumen}}</p>
+                                        </ion-col>
+                                        <ion-col col-6>
+                                            <p><ion-icon name="person"></ion-icon>&ensp;&ensp;{{ x.nama_konsumen}}</p>
+                                            <p><ion-icon name="contacts"></ion-icon>&ensp;&ensp;{{ x.third_party_name}}</p>
+                                        </ion-col>
+                                        <ion-col ></ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+                                </ion-item>
+                                <ion-item-options side="right">
+                                    <button ion-button (click)="editstatus(x)" style="background-color:#f9dc5c; color:#232526;">
+                                        <ion-icon style="font-size: 30px;" name="trending-up"></ion-icon>
+                                    </button>
+                                    <button ion-button (click)="modeedit(x)" style="background-color:#403f4c; color:white;">
+                                        <ion-icon style="font-size: 30px;" name="create"></ion-icon>
+                                    </button>
+                                    <button ion-button (click)="delete(x)" style="background-color:#e84855; color:#232526;">
+                                    <ion-icon style="font-size: 30px;" name="trash"></ion-icon>
+                                    </button>
+                                    <button *ngIf="x.status == 5" ion-button (click)="printinvoice(x)" style="background-color:#8bd8bd; color:#232526;">
+                                    <ion-icon style="font-size: 30px;" name="print"></ion-icon>
+                                    </button>
+                                </ion-item-options>
+                            </ion-item-sliding>  
+                            </ion-list>
+                            <div class="bottomspace" ></div>
+                        </div>
+            
+                    </div>
+
+        </div>
+
+    </div>
+<!-- // ================================================================================================ -->
+<!-- // ===================================== EDIT DATA ============================================ -->
+
+    <div *ngIf="divstatus == 'modeedit'">  
+        <div class="form" > 
+        <ion-row> 
+        <ion-col>
+            <ion-item>
+                <ion-label floating>Nama Konsumen</ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.nama_konsumen" ></ion-input>
+            </ion-item>
+            <ion-item *ngIf="adatakonsumen.third_party_job == true">
+                <ion-label floating>Nama Pihak Ketiga</ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.third_party_name" ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Merek / Seri</ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.merek" ></ion-input>
+            </ion-item>
+            <ion-item style="padding-top:5px;">
+                <ion-label>Kelengkapan</ion-label>
+                <ion-select [(ngModel)]="adatakonsumen.kelengkapan" multiple="true">
+                  <ion-option>Device</ion-option>
+                  <ion-option>Charger</ion-option>
+                  <ion-option>Tas</ion-option>
+                </ion-select>
+              </ion-item>
+            <ion-item>
+                <ion-label floating>
+                    <h2>No handphone</h2>
+                    <ion-note style="font-size: 15px;">* Please Use +62 Format for Better Experience</ion-note>
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.no_hp" ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Deskripsi Permasalahan</ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.problem_desk" ></ion-input>
+            </ion-item>     
+                <ion-item>
+                <ion-label floating>Catatan</ion-label>
+                <ion-input type="text" [(ngModel)]="adatakonsumen.catatan" ></ion-input>
+                </ion-item>
+        </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center >
+                <button *ngIf="adatakonsumen.third_party_job == false" name="save" class="button1" ion-button round color="transparant" (click)="editdata()" [disabled]="!adatakonsumen.nama_konsumen || !adatakonsumen.merek || !adatakonsumen.kelengkapan || !adatakonsumen.no_hp || !adatakonsumen.problem_desk">Save</button>
+                <button *ngIf="adatakonsumen.third_party_job == true" name="save" class="button1" ion-button round color="transparant" (click)="editdata2()" [disabled]="!adatakonsumen.nama_konsumen || !adatakonsumen.third_party_name || !adatakonsumen.merek || !adatakonsumen.kelengkapan || !adatakonsumen.no_hp || !adatakonsumen.problem_desk">Save</button>
+
+            </ion-col>
+        </ion-row>
+
+        </div>
+        <div class="bottomspace"></div>
+    </div>
+
+<!-- // ================================================================================================ -->
+<!-- // ===================================== Edit Status ============================================ -->
+
+    <div *ngIf="divstatus == 'modeeditstatus' && segment == 'graph1'" style="margin-top:120px;"> 
+
+        <div class="sstatus" *ngIf="dataedit.status == 1" style="background-color:#e84855"><p class="texty">Accepted</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 2" style="background-color:#ffbb33"><p style="color:#232526" class="texty">Check</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 3" style="background-color:#feef6d"><p style="color:#232526" class="texty">Waiting</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 4" style="background-color:#33b5e5"><p style="color:#232526" class="texty">Process</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 5" style="background-color:#00c581"><p class="texty">Finished</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 6" style="background-color:#232526"><p class="texty">Failed</p></div>
+
+
+            <div class="rowx">
+                <div class="large-8 large-centered">
+                    <div class="wrapperx">
+
+                    <ion-row> 
+                        <ion-col>
+                        <button class="circlex" style="background-color:#232526" (click)="changestatus2(st = 6, dataedit.id_konsumen)">
+                            <h6 class="textx" style="color:white">Failed</h6>
+                        </button>
+                        </ion-col>
+
+                        <ion-col>
+                        <button class="circlex" style="background-color:#00c581;" (click)="statusfinished1(dataedit)">
+                            <h6 class="textx">Finished</h6>
+                        </button>
+                        </ion-col>
+                    </ion-row>
+
+                    <div class="vertical-linex"></div>
+
+                    <div class="circley">
+                        <button class="circlex" style="background-color:#33b5e5;" (click)="changestatus(st = 4, dataedit.id_konsumen, dataedit.status)">
+                            <h6 class="textx" style="color:#232526;">Process</h6>
+                        </button>
+                    </div>
+
+                    <div class="vertical-linex"></div>
+
+                    <div class="circley">
+                        <button class="circlex" style="background-color:#feef6d;" (click)="changestatus(st = 3, dataedit.id_konsumen, dataedit.status)">
+                            <h6 class="textx" style="color:#232526;">Waiting</h6>
+                        </button>
+                    </div>
+
+                    <div class="vertical-linex"></div>
+
+                    <div class="circley">
+                        <button class="circlex" style="background-color:#ffbb33;" (click)="changestatus(st = 2, dataedit.id_konsumen, dataedit.status)">
+                            <h6 class="textx" style="color:#232526;">Check</h6>
+                        </button>
+                    </div>
+
+                    <div class="vertical-linex"></div>
+
+                    <div class="circley">
+                        <button class="circlex" style="background-color:#e84855" (click)="changestatus(st = 1, dataedit.id_konsumen, dataedit.status)">
+                            <h6 class="textx">Accepted</h6>
+                        </button>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="bottomspace"></div> -->
+    </div>
+
+    <!-- ///////////////////////////////  SEGMENT 2  ////////////////////////////////////// -->
+
+    <div *ngIf="divstatus == 'modeeditstatus' && segment == 'graph2'" style="margin-top:120px;"> 
+
+        <div class="sstatus" *ngIf="dataedit.status == 4" style="background-color:#33b5e5"><p style="color:#232526" class="texty">Process</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 5" style="background-color:#00c581"><p class="texty">Finished</p></div>
+        <div class="sstatus" *ngIf="dataedit.status == 6" style="background-color:#232526"><p class="texty">Failed</p></div>
+    
+    
+            <div class="rowx">
+                <div class="large-8 large-centered">
+                <div class="wrapperx">
+    
+                    <ion-row> 
+                    <ion-col>
+                        <button class="circlex" style="background-color:#232526" (click)="changestatus2(st = 6, dataedit.id_konsumen)">
+                            <h6 class="textx" style="color:white">Failed</h6>
+                        </button>
+                    </ion-col>
+    
+                    <ion-col>
+                        <button class="circlex" style="background-color:#00c581;" (click)="statusfinished1seg2(dataedit)">
+                            <h6 class="textx">Finished</h6>
+                        </button>
+                    </ion-col>
+                    </ion-row>
+    
+                    <div class="vertical-linex"></div>
+    
+                    <div class="circley">
+                    <button class="circlex" style="background-color:#33b5e5;" (click)="changestatus(st = 4, dataedit.id_konsumen, dataedit.status)">
+                        <h6 class="textx" style="color:#232526;">Process</h6>
+                    </button>
+                    </div>
+    
+    
+                </div>
+                </div>
+            </div>
+
+    </div>
+
+
+<!-- // ================================================================================================ -->
+<!-- // ===================================== Detail Data ============================================ -->
+    <div *ngIf="divstatus == 'modedetaildata'" class="modedetaildata">
+    
+
+        <!-- <span style="background-color:rgba(0, 0, 0, 0);" class="closeicon"> -->
+        <button class="closeicon" clear (click)="modenormal()">
+            <ion-icon class="ciicon" name="close"></ion-icon>
+        </button>
+        <!-- </span> -->
+        <ion-row style="margin-top:-70px">
+        <ion-col >
+            <div *ngIf="datadetail.status == 1" style="background-color:#ff4444; color:#232526"  class="status_header">
+                Accepted
+            </div>
+            <div *ngIf="datadetail.status == 2" style="background-color:#ffbb33; color:#232526" class="status_header">
+                Check
+            </div>
+            <div *ngIf="datadetail.status == 3" style="background-color:#feef6d; color:#232526" class="status_header">
+                Waiting
+            </div>
+            <div *ngIf="datadetail.status == 4" style="background-color:#33b5e5; color:#232526" class="status_header">
+                Process
+            </div>
+            <div *ngIf="datadetail.status == 5" style="background-color:#00c581; color:#232526" class="status_header">
+                Finished
+            </div>
+            <div *ngIf="datadetail.status == 6" style="background-color:#232526; color:white" class="status_header">
+                Failed
+            </div>
+            <p class="dd_id">Konsumen Id {{datadetail.id_konsumen}}</p>
+            <div *ngIf="datadetail.third_party_job == true" style="background-color:#232526; color:white"  class="status_header2">
+                    Third Party Work
+                </div>
+        </ion-col>
+        </ion-row>
+
+            <ion-list>
+                    <ion-item >
+                        <ion-label stacked><ion-icon name="person"></ion-icon>&ensp;&ensp;Nama</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.nama_konsumen}}"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.third_party_job == true" >
+                        <ion-label stacked><ion-icon name="contacts"></ion-icon>&ensp;&ensp;Nama Pihak Ketiga</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.third_party_name}}"></ion-input>
+                    </ion-item>
+                    <ion-item >
+                        <ion-label stacked><ion-icon name="call"></ion-icon>&ensp;&ensp;Telepon</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.no_hp}}"></ion-input>
+                        <button style="background-color: transparent; color:grey;" item-right ><a class="walink" href="{{noWhatsapp}}"><ion-icon style="color:#00c581" name="logo-whatsapp"></ion-icon>&ensp;Whatsapp</a></button>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="arrow-down"></ion-icon>&ensp;&ensp;Tanggal Masuk</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.tanggal_masuk}}"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.third_party_job == true">
+                        <ion-label stacked><ion-icon name="arrow-forward"></ion-icon>&ensp;&ensp;Tanggal Transfer</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.third_party_transfer_date}}"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label *ngIf="datadetail.status != 6" stacked><ion-icon name="arrow-up"></ion-icon>&ensp;&ensp;Tanggal Keluar</ion-label>
+                        <ion-label *ngIf="datadetail.status == 6" stacked><ion-icon name="close"></ion-icon>&ensp;&ensp;Tanggal Pembatalan</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.tanggal_keluar}}"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="desktop"></ion-icon>&ensp;&ensp;Merek</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.merek}}"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="cube"></ion-icon>&ensp;&ensp;Kelengkapan</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.kelengkapan}}"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.status == 5 && segment == 'graph2'">
+                        <ion-label stacked><ion-icon name="card"></ion-icon>&ensp;&ensp;Total Pembayaran ke Pihak Ketiga </ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;Rp.&ensp;{{datapembayarankonsumen.third_party_total_payment}}"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.status == 5">
+                        <ion-label stacked><ion-icon name="card"></ion-icon>&ensp;&ensp;Total Biaya</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;Rp.&ensp;{{datapembayarankonsumen.totalpembayaran}}"></ion-input>
+                        <button style="background-color: transparent; color:#e84855;" item-right (click)="detailpembayaran()"><ion-icon style="color:#e84855" name="stats"></ion-icon>&ensp;Detail</button>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.status != 5">
+                    <ion-label stacked><ion-icon name="clipboard"></ion-icon>&ensp;&ensp;Deskripsi Permasalahan</ion-label>
+                    <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.problem_desk}}"></ion-input>
+                    </ion-item>      
+                <ion-item *ngIf="datadetail.catatan != null">
+                    <ion-label stacked><ion-icon name="clipboard"></ion-icon>&ensp;&ensp;Catatan</ion-label>
+                    <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.catatan}}"></ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="datadetail.status == 5">
+                    <ion-label stacked><ion-icon name="construct"></ion-icon>&ensp;&ensp;Jenis Service</ion-label>
+                    <ion-input *ngFor="let x of datapembayarankonsumen.detailpembayaran" class="inputdisable" placeholder="&ensp;&ensp;&ensp;-  {{x.description}}"></ion-input>
+                    </ion-item>     
+            </ion-list>
+    
+    </div>
+
+    <!-- // ________________________ Detail Data "DIV DETAIL PEMBAYARAN" _________________________________ -->
+        <div *ngIf="divdetailpembayaran" class="divdetailpembayaran">
+
+            <ion-row>	
+                <ion-col col-10>
+            </ion-col>
+            <ion-col col-2>
+                <button class="buttonx" (click)="closedivdetailpembayaran()" ion-button><ion-icon style="color: #fff" name="close"></ion-icon></button>
+            </ion-col>
+            </ion-row>
+            
+            <div >
+            <ion-card *ngFor="let x of datapembayarankonsumen.detailpembayaran">
+                <ion-row >            
+                <ion-col col-8>
+                    <ion-item>
+                    <ion-label stacked >Service Description</ion-label>
+                    <ion-input type="text" [(ngModel)]="x.description" class="inputdisable" ></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col col-4>
+                    <ion-item>
+                        <ion-label stacked >Qty</ion-label>
+                        <ion-input type="number" [(ngModel)]="x.qty" class="inputdisable"></ion-input>
+                    </ion-item>
+                </ion-col>
+                </ion-row>
+                <ion-row >            
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label stacked >Initial Capital</ion-label>
+                            <ion-input type="text"  [(ngModel)]="x.capital" class="inputdisable"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label stacked >Total Capital</ion-label>
+                            <ion-input  type="text"  [(ngModel)]="x.totalcapital" class="inputdisable"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label stacked >Service Prices</ion-label>
+                            <ion-input type="number"  [(ngModel)]="x.price" class="inputdisable"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label stacked >Total Service Prices</ion-label>
+                            <ion-input type="text" [(ngModel)]="x.itempricetotal" class="inputdisable" ></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+
+            <ion-card>
+                    <ion-card-header>
+                        Total Capital
+                    </ion-card-header>
+                    <ion-card-content>
+                        <h3 class="grandtotal">
+                        Rp. {{datapembayarankonsumen.totalcapital}}
+                        </h3>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card>
+                    <ion-card-header>
+                        Total to be Paid
+                    </ion-card-header>
+                    <ion-card-content>
+                        <h3 class="grandtotal">
+                        Rp. {{datapembayarankonsumen.totalpembayaran}}
+                        </h3>
+                    </ion-card-content>
+                </ion-card>
+
+            </div>
+            <!-- <ion-row class="rowtotalprices">
+                <ion-col col-2></ion-col>
+                <ion-col col-8 align-center class="totalprices">
+                    <p>Rp. {{datapembayarankonsumen.totalpembayaran}}</p>
+                </ion-col>
+                <ion-col col-2></ion-col>
+            </ion-row>  -->
+
+
+        </div>
+
+<!-- // ================================================================================================ -->
+<!-- // ===================================== Pembayaran ============================================ -->
+    <div *ngIf="divstatus == 'detailpembayaran'">
+
+        <!-- __________________________________DIV DETAIL PEMBAYARAN____________________________________________________ -->
+
+        <div *ngIf="divcheckout == false" class="pembayaran">
+
+
+                <ion-card *ngIf="segment == 'graph2'">
+                    <ion-row >            
+                    <ion-col col-12>
+                        <ion-item>
+                        <ion-label stacked >Third Party Name</ion-label>
+                        <ion-input type="text" [(ngModel)]="third_party_name_form_up_status" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    </ion-row>
+                    <ion-row >
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label stacked >Total Payment to Third Parties</ion-label>
+                                <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel" [(ngModel)]="third_party_total_payment_form_up_status" placeholder="Rp ....................." required></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            <!-- _____________________________________________________________________________________________________ -->
+            <ion-row>	
+                <ion-col col-10>
+            </ion-col>
+            <ion-col col-2>
+                <button class="buttonx" (click)="selectNo1(1);" ion-button><ion-icon style="color: #fff" name="md-add"></ion-icon></button>
+            </ion-col>
+        </ion-row>
+        <!-- _____________________________________________________________________________________________________ -->
+
+            <ion-card *ngFor="let item of MySelect1; let i=index; ">
+                <ion-row>
+                    <ion-col col-2>
+                        <button class="buttonx"  ion-button (click)="selectNo1(0);"><ion-icon style="color: #fff" name="md-remove"></ion-icon></button>
+                    </ion-col>
+                </ion-row>
+                <ion-row >            
+                <ion-col col-12>
+                    <ion-item>
+                    <ion-label stacked >Service Description</ion-label>
+                    <ion-input type="text" [(ngModel)]="doc_description[item]" id="doc_description[{{item}}]" name="doc_description[{{item}}]" placeholder="input here" required></ion-input>
+                    </ion-item>
+                </ion-col>
+                </ion-row>
+                <ion-row >            
+                    <ion-col col-12>
+                        <ion-item>
+                            <ion-label stacked >Initial Capital</ion-label>
+                            <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="doc_capital[item]" name="doc_capital[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-8>
+                        <ion-item>
+                            <ion-label stacked >Service Prices</ion-label>
+                            <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="doc_price[item]" name="doc_price[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label stacked >Qty</ion-label>
+                            <ion-input type="number" [(ngModel)]="doc_qty[item]" name="doc_qty[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+            <button *ngIf="segment == 'graph1'" ion-button class="buttonx" full  (click)="submitData()" >Checkout</button>
+            <button *ngIf="segment == 'graph2'" ion-button class="buttonx" full  (click)="submitDatasegment2()" >Checkout</button>
+            <div class="bottomspace"></div>
+        </div>
+
+
+        <!-- ___________________________________ Div Checkout _____________________________________________ -->
+
+            <div *ngIf="divcheckout" class="detailpembayaran2">
+                
+            <div class="carddetailpembayaran">
+                <ion-row>	
+                    <ion-col col-10>
+                </ion-col>
+                <ion-col col-2>
+                    <button class="buttonx" (click)="closex()" ion-button><ion-icon style="color: #fff" name="close"></ion-icon></button>
+                </ion-col>
+                </ion-row>
+
+                <!-- _____________________________________________________________________________________________________ -->
+
+                <ion-card *ngIf="segment == 'graph2'">
+                        <ion-row >            
+                        <ion-col col-12>
+                            <ion-item>
+                            <ion-label stacked >Third Party Name</ion-label>
+                            <ion-input class="inputdisable" type="text" [(ngModel)]="third_party_name_form_up_status" required></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        </ion-row>
+                        <ion-row >
+                            <ion-col col-8>
+                                <ion-item>
+                                    <ion-label stacked >Total Payment to Third Parties</ion-label>
+                                    <ion-input class="inputdisable" [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel" [(ngModel)]="third_party_total_payment_form_up_status" placeholder="Rp ....................." required></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card>
+                <!-- _____________________________________________________________________________________________________ -->
+
+
+                <ion-card *ngFor="let dp of datapembayaran;" >
+                    <ion-row >            
+                    <ion-col col-8>
+                        <ion-item>
+                        <ion-label stacked >Service Description</ion-label>
+                        <ion-input type="text" [(ngModel)]="dp.description" class="inputdisable" ></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label stacked >Qty</ion-label>
+                            <ion-input type="number" [(ngModel)]="dp.qty" class="inputdisable"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    </ion-row>
+                    <ion-row >            
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label stacked >Initial Capital</ion-label>
+                                <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="dp.capital" class="inputdisable"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label stacked >Total Capital</ion-label>
+                                <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="dp.totalcapital" class="inputdisable"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label stacked >Service Prices</ion-label>
+                                <ion-input  [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="text"  [(ngModel)]="dp.price" class="inputdisable"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label stacked >Total Service Prices</ion-label>
+                                <ion-input  [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="text" [(ngModel)]="dp.itempricetotal" class="inputdisable"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+
+                <ion-card>
+                        <ion-card-header>
+                            Total Capital
+                        </ion-card-header>
+                        <ion-card-content>
+                            <h3 class="grandtotal">
+                            Rp. {{totalalltotalcapital}}
+                            </h3>
+                        </ion-card-content>
+                    </ion-card>
+                    <ion-card>
+                        <ion-card-header>
+                            Total to be Paid
+                        </ion-card-header>
+                        <ion-card-content>
+                            <h3 class="grandtotal">
+                            Rp. {{totalprices}}
+                            </h3>
+                        </ion-card-content>
+                    </ion-card>
+
+                </div>
+                
+
+            
+                <!-- <ion-row class="rowtotalprices">
+
+                    <ion-col col-2></ion-col>
+                    <ion-col col-8 align-center class="totalprices">
+                            <p>Rp. {{totalprices}}</p>
+                    </ion-col>
+                    <ion-col col-2></ion-col>
+                </ion-row> -->
+                <button *ngIf="segment == 'graph1'" ion-button class="buttonx" full  (click)="saveData()" >Process</button>
+                <button *ngIf="segment == 'graph2'" ion-button class="buttonx" full  (click)="saveDatasegment2()" >Process</button>
+                </div>
+
+    
+        
+    </div>
+
+
+
+
+
+
+
+
+
+</div> <!-- list -->
+</ion-content>
+
+
+
+

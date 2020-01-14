@@ -1,0 +1,209 @@
+
+<div class="header1" >
+  <ion-row >
+    <ion-col >
+        <button ion-button clear class="text1" (click)="back()"  icon-start>
+            <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+        </button>
+    </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col>
+      <h3 class="text">Add New Data</h3>  
+      <div class="line"></div>
+      <h3 *ngIf="segment == 'graph1'" class="text2">Normal</h3>  
+      <h3 *ngIf="segment == 'graph2'" class="text2">Manual</h3> 
+    </ion-col>
+  </ion-row>
+  <ion-row >
+    <ion-col>
+            <ion-segment class="segment" [(ngModel)]="segment">
+              <ion-segment-button value="graph1" (click)="graph1()">
+                  <ion-icon class="segmenticon" name="analytics"></ion-icon>
+              </ion-segment-button>
+              <ion-segment-button value="graph2" (click)="graph2()">
+                  <ion-icon class="segmenticon" name="md-git-network"></ion-icon>
+              </ion-segment-button>
+            </ion-segment>
+  </ion-col>
+</ion-row>
+</div>
+
+
+
+<ion-content class="conten" >
+  <div [ngSwitch]="segment" >  
+    <div *ngSwitchCase="'graph1'" >
+  
+      <div class="form" > 
+      <ion-row> 
+        <ion-col>
+            <ion-item>
+              <ion-label floating>Nama Konsumen</ion-label>
+              <ion-input type="text" [(ngModel)]="datakonsumen.nama_konsumen" ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Merek / Seri</ion-label>
+              <ion-input type="text" [(ngModel)]="datakonsumen.merek" ></ion-input>
+            </ion-item>
+            <ion-item style="padding-top:5px;">
+              <ion-label>Kelengkapan</ion-label>
+              <ion-select [(ngModel)]="datakonsumen.kelengkapan" multiple="true">
+                <ion-option>Device</ion-option>
+                <ion-option>Charger</ion-option>
+                <ion-option>Tas</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>
+                <h2>No handphone</h2>
+                <ion-note style="font-size: 15px;">* Please Use +62 Format for Better Experience</ion-note>
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="datakonsumen.no_hp" ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label floating>Deskripsi Permasalahan</ion-label>
+              <ion-input type="text" [(ngModel)]="datakonsumen.problem_desk" ></ion-input>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label floating>Catatan</ion-label>
+              <ion-input type="text" [(ngModel)]="datakonsumen.catatan" ></ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center >
+                <button name="save" class="button1" ion-button round color="transparant" (click)="generatenokonsumen()" [disabled]="!datakonsumen.nama_konsumen || !datakonsumen.merek || !datakonsumen.kelengkapan || !datakonsumen.no_hp || !datakonsumen.problem_desk">Save</button>
+            </ion-col>
+        </ion-row>
+        <div class="bottomspace" ></div>
+      </div>
+
+    </div>
+
+    <div *ngSwitchCase="'graph2'">
+
+      <div class="form" > 
+          <ion-row> 
+            <ion-col>
+              <ion-item>
+                <ion-label floating>Nama Konsumen</ion-label>
+                <ion-input type="text" [(ngModel)]="datakonsumen.nama_konsumen" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>Merek / Seri</ion-label>
+                <ion-input type="text" [(ngModel)]="datakonsumen.merek" ></ion-input>
+              </ion-item>
+              <ion-item style="padding-top:5px;">
+                <ion-label>Kelengkapan</ion-label>
+                <ion-select [(ngModel)]="datakonsumen.kelengkapan" multiple="true">
+                  <ion-option>Device</ion-option>
+                  <ion-option>Charger</ion-option>
+                  <ion-option>Tas</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-label floating>
+                  <h2>No handphone</h2>
+                  <ion-note style="font-size: 15px;">* Please Use +62 Format for Better Experience</ion-note>
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="datakonsumen.no_hp" ></ion-input>
+              </ion-item>
+  
+              <ion-item>
+                <ion-label floating>Deskripsi Permasalahan</ion-label>
+                <ion-input type="text" [(ngModel)]="datakonsumen.problem_desk" ></ion-input>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label floating>Catatan</ion-label>
+                <ion-input type="text" [(ngModel)]="datakonsumen.catatan" ></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label >Tanggal Masuk</ion-label>
+                <ion-input type="date" [(ngModel)]="datakonsumen.tanggal_masuk" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label >Tanggal Keluar</ion-label>
+                <ion-input type="date" [(ngModel)]="datakonsumen.tanggal_keluar" ></ion-input>
+              </ion-item>
+  
+            </ion-col>
+            </ion-row>
+             <!-- _____________________________________________________________________________________________________ -->
+            <ion-row>	
+              <ion-col col-10>
+                  <h3 class="rincian">Tambah Rincian Pembayaran</h3>
+              </ion-col>
+              <ion-col col-2>
+                  <button class="buttonx" (click)="selectNo1(1);" ion-button><ion-icon style="color: #fff" name="md-add"></ion-icon></button>
+              </ion-col>
+            </ion-row>
+        <!-- _____________________________________________________________________________________________________ -->
+
+            <ion-card *ngFor="let item of MySelect1; let i=index; ">
+                <ion-row>
+                    <ion-col col-2>
+                        <button class="buttonx"  ion-button (click)="selectNo1(0);"><ion-icon style="color: #fff" name="md-remove"></ion-icon></button>
+                    </ion-col>
+                </ion-row>
+                <ion-row >            
+                <ion-col col-12>
+                    <ion-item>
+                    <ion-label stacked >Service Description</ion-label>
+                    <ion-input type="text" [(ngModel)]="doc_description[item]" id="doc_description[{{item}}]" name="doc_description[{{item}}]" placeholder="input here" required></ion-input>
+                    </ion-item>
+                </ion-col>
+                </ion-row>
+                <ion-row >            
+                    <ion-col col-12>
+                        <ion-item>
+                          <ion-label stacked >Initial Capital</ion-label>
+                          <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="doc_capital[item]" name="doc_capital[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-8>
+                        <ion-item>
+                            <ion-label stacked >Service Prices</ion-label>
+                            <ion-input [brmasker]="{numberAndTousand: true, thousand: '.', type: 'num'}" type="tel"  [(ngModel)]="doc_price[item]" name="doc_price[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label stacked >Qty</ion-label>
+                            <ion-input type="number" [(ngModel)]="doc_qty[item]" name="doc_qty[{{item}}]" placeholder="input here" required></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+    
+            <ion-row>
+                <ion-col text-center >
+                    <button name="save" class="button1" ion-button round color="transparant" (click)="generatenokonsumen()" [disabled]="!datakonsumen.tanggal_masuk || !datakonsumen.tanggal_keluar || !datakonsumen.nama_konsumen || !datakonsumen.merek || !datakonsumen.kelengkapan || !datakonsumen.no_hp || !datakonsumen.problem_desk">Save</button>
+                </ion-col>
+            </ion-row>
+            <div class="bottomspace" ></div>
+          </div>
+
+    </div>
+
+
+  </div>     <!-- segment -->
+
+
+
+
+
+
+
+
+
+</ion-content>
+

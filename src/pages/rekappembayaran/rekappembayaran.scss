@@ -1,0 +1,91 @@
+page-rekappembayaran {
+
+    .header1
+{
+    background-color:color($colors, theme);
+    height: 110px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 111100;
+    transition: .4s;
+    -moz-transition: .4s; /* Firefox 4 */
+    -webkit-transition: .4s; /* Safari and Chrome */
+    
+}
+.line{
+    width: 112px;
+    border-bottom: 2px solid;
+    border-color: whitesmoke;
+    margin-left: 4%;
+    // margin-top: px;
+
+    }
+.text1, .text1:focus
+{
+    color: whitesmoke;
+}
+.text
+{
+    color: whitesmoke;
+    margin-top: -3%;
+    margin-left: 4%;
+    font-size: 20px;
+    font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.segment
+{
+    background-color: #232526;
+    width: 100%;
+    z-index: 1100;
+    position: fixed;
+    left:0;
+    margin-top:-3%;
+}
+.segmenticon 
+{
+    color: color($colors, theme);
+}
+
+
+
+.cont
+{
+    margin-top:122px !important;
+}
+
+.conten
+{
+    ::-webkit-scrollbar{
+        display:none;
+        }
+}
+
+.filteryear
+{
+    color: color($colors, theme);
+}
+
+.grandtotal
+{
+    text-align: center;
+    font-size: 18px;
+    color: grey;
+}
+.note
+{
+    font-size: 11px;
+    color:grey;
+}
+.text2
+{
+    color: whitesmoke;
+    margin-top: -2.5%;
+    margin-left: 130px;
+    // font-size: 20px;
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+}

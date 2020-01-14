@@ -1,0 +1,119 @@
+<!-- // =================================== Header Mode Normal ============================================= -->
+
+  <div *ngIf="divstatus == 'modenormal'" class="header1" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent" >
+    <div class="headnonsearch"> 
+    <ion-row >
+        <ion-col >
+            <button ion-button clear class="text1" (click)="nav_home()"  icon-start>
+                <ion-icon style="font-size: 20px;" name="arrow-back"></ion-icon>
+            </button>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col>
+          <h3 class="text">Consumer Booking Data</h3> 
+          <div class="line"></div>
+        </ion-col>
+      </ion-row>
+
+    </div> 
+      <div class="searchbar" *ngIf=" dataisnull == false"  [scrollHide]="headerScrollConfig2" [scrollContent]="pageContent">
+          <ion-row>
+              <ion-col>
+                  <ion-searchbar debounce="500" [(ngModel)]="terms" animated showCancelButton cancelButtonText="Custom Cancel"></ion-searchbar>
+              </ion-col>
+          </ion-row>
+      </div>
+  </div>
+
+
+
+  <ion-content class="conten" #pageContent fullscreen>
+
+<!-- // ================================================================================================ -->
+<!-- // ===================================== Mode Normal ============================================ -->
+  <div *ngIf="divstatus == 'modenormal'">
+      <div class="status_all" style="margin-top:125px !important" >
+
+          <div *ngIf="dataisnull == true" class="dataisnull"  >
+              <img class="dataisnullimage" src="../assets/imgs/mining.png"/>
+              <h3 class="dataisnulltext">No customer is booking your services</h3> 
+          </div>
+
+          <ion-list class="divnormal">
+          <ion-item-sliding *ngFor="let x of value | search : terms ">
+              <ion-item (click)='modedetaildata(x)'>
+                  <ion-grid class="list_box">               
+                      <ion-row>
+                      <ion-col text-center col-3>
+                          <p style="color:#ff4444" class="nokonsumen">{{ x.no_konsumen}}</p>
+                      </ion-col>
+                      <ion-col col-6>
+                          <p><ion-icon name="person"></ion-icon>&ensp;&ensp;{{ x.nama_konsumen}}</p>
+                          <p><ion-icon name="arrow-down"></ion-icon>&ensp;&ensp;{{ x.tanggal_masuk}}</p>
+                      </ion-col>
+                      <ion-col ></ion-col>
+                      </ion-row>
+                  </ion-grid>
+              </ion-item>
+              <ion-item-options side="right">
+                  <button ion-button (click)="delete(x)" style="background-color:#e84855; color:#232526;">
+                      <ion-icon style="font-size: 30px;" name="close-circle"></ion-icon>
+                  </button>
+                  <button ion-button (click)="accepted(x)" style="background-color:#00c581; color:#232526;">
+                      <ion-icon style="font-size: 30px;" name="checkmark-circle"></ion-icon>
+                  </button>
+              </ion-item-options>
+          </ion-item-sliding>  
+          </ion-list>
+          <div  class="bottomspace" ></div>
+      </div>
+
+  </div>
+
+<!-- // ================================================================================================ -->
+<!-- // =================================== Mode Detail Data ============================================ -->
+    <div *ngIf="divstatus == 'modedetaildata'" class="modedetaildata">
+        
+    <!-- <span style="background-color:rgba(0, 0, 0, 0);" class="closeicon"> -->
+        <button class="closeicon" clear (click)="modenormal()">
+            <ion-icon class="ciicon" name="close"></ion-icon>
+        </button>
+        <!-- </span> -->
+        <ion-row style="margin-top:50px">
+        <ion-col >
+            <div style="background-color:#ff4444; color:#232526"  class="status_header">
+                Booking
+            </div>
+            <p class="dd_id">Konsumen Id {{datadetail.id_konsumen}}</p>
+        </ion-col>
+        </ion-row>
+
+            <ion-list>
+                    <ion-item >
+                        <ion-label stacked><ion-icon name="person"></ion-icon>&ensp;&ensp;Nama</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.nama_konsumen}}"></ion-input>
+                    </ion-item>
+                    <ion-item >
+                        <ion-label stacked><ion-icon name="call"></ion-icon>&ensp;&ensp;Telepon</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.no_hp}}"></ion-input>
+                        <button style="background-color: transparent; color:grey;" item-right ><a class="walink" href="{{noWhatsapp}}"><ion-icon style="color:#00c581" name="logo-whatsapp"></ion-icon>&ensp;Whatsapp</a></button>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="arrow-down"></ion-icon>&ensp;&ensp;Tanggal Masuk</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.tanggal_masuk}}"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="desktop"></ion-icon>&ensp;&ensp;Merek</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.merek}}"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked><ion-icon name="clipboard"></ion-icon>&ensp;&ensp;Deskripsi Permasalahan</ion-label>
+                        <ion-input class="inputdisable" placeholder="&ensp;&ensp;&ensp;{{datadetail.problem_desk}}"></ion-input>
+                    </ion-item>      
+  
+            </ion-list>
+
+    </div>
+
+</ion-content>

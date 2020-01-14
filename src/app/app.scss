@@ -1,0 +1,25 @@
+[scrollbar-y-auto] .scroll-content {
+    overflow-y: auto !important;
+  }
+
+  .alert-md-head-text-align
+  {
+    text-align: center;
+  }
+
+  .alert-message
+{
+  overflow-y: auto;
+  ::-webkit-scrollbar{
+    display:none;
+    }
+}
+
+.alert-top{
+  padding: 0 !important;
+  align-items: center !important;
+}
+
+.toastexit {
+  text-align:center;
+ }

@@ -1,0 +1,186 @@
+page-booking {
+
+    .conten
+    {
+        ::-webkit-scrollbar{
+        display:none;
+        }
+    }
+    .header1
+    {
+        background-color:color($colors, theme);
+        height: 55px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left:0;
+        z-index: 111100;
+        transition: .4s;
+        -moz-transition: .4s; /* Firefox 4 */
+        -webkit-transition: .4s; /* Safari and Chrome */
+        
+    }
+    .text1, .text1:focus
+    {
+        color: whitesmoke;
+    }
+    .text_1, .text_1:focus
+    {
+        color: color($colors, theme);
+        float: right;
+        font-size: 14px;
+    }
+    .line
+    {
+        width: 112px;
+        border-bottom: 2px solid;
+        border-color: whitesmoke;
+        margin-left: 4%;
+        margin-top: -1%;
+    
+    }
+    .text
+    {
+        color: whitesmoke;
+        margin-top: -3%;
+        margin-left: 4%;
+        font-size: 20px;
+        font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .headnonsearch
+    {
+        background-color: color($colors, theme);
+        // height: 100%;
+        width: 100%;
+        z-index: 100;
+        position: relative;
+        padding-bottom: 1%;
+
+    }
+    .searchbar
+    {
+        // margin-top:-2%;
+        z-index: 10;
+        // height: 100%;
+        // width: 100%;
+        transition: .2s;
+        -moz-transition: .2s; /* Firefox 4 */
+        -webkit-transition: .2s; /* Safari and Chrome */
+
+    }
+    .sbar
+    {
+        z-index: 10;
+        display: block;
+    }
+    .searchbar-input {
+        border: 0 !important;
+        box-shadow: none !important;
+        border-radius: 90px !important;
+        // height: 30px !important ;
+        background-color: #dbdada !important;
+    }
+    .searchbar
+    {
+        border-radius: 6px;
+    }
+
+
+
+
+    .bottomspace
+    {
+        height: 30px;
+        width: 100%;
+    }
+    .status_all
+    {
+        height: 70%;
+        width: 100%;
+    }
+    .dataisnull
+    {
+        padding-top:20% !important;
+    }
+    .dataisnullimage
+    {
+        text-align: center;
+        height:160px;
+        margin:0 auto;
+        display: block;
+        overflow-y: hidden !important
+    }
+    .dataisnulltext
+    {
+        text-align: center;
+        font: 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: rgb(156, 156, 156);
+    }
+    .nokonsumen
+    {
+        font: bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height: 14px;
+      height:25px;
+      margin: 0px;
+      display: table-cell;
+      vertical-align: middle;
+      padding: 11px;
+    }
+
+
+    // =================================================================================================
+    // =================================================================================================
+    .walink{
+        text-decoration: none;
+        color: #00c581;
+        
+    }
+    .closeicon
+    {
+        right: 2%; 
+        top: 1%;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .ciicon
+    {
+        font-size: 25px;
+
+    }
+    .status_header
+    {
+        font: bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 49px;
+        text-align: center;
+        height: 40px;
+        width: 180px;
+        background-color: #ff4444;
+        color: #232526;
+        border-radius: 100px;
+        margin: 0 auto;
+    }
+    .dd_id
+    {
+        font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: center;
+        margin-top:5px;
+    }
+
+    .inputdisable
+    {
+      pointer-events:none;
+      ::-webkit-input-placeholder
+      {
+        color: black;
+        opacity: 1;
+      }
+    }
+
+
+
+
+
+
+
+
+}

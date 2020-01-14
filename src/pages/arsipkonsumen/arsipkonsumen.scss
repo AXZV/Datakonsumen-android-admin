@@ -1,0 +1,575 @@
+page-arsipkonsumen {
+.conten
+{
+    ::-webkit-scrollbar{
+    display:none;
+    }
+}
+// ---------------------------------------------------------------------------------------------
+
+$size: 50%;
+.header
+{
+    background-color: color($colors, theme);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 111100;
+    border-bottom-left-radius: $size * 2;
+    border-bottom-right-radius: $size * 2;
+    -webkit-box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+    -moz-box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+    box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+
+
+}
+
+.header1
+{
+    background-color:color($colors, theme);
+    height: 95px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 111100;
+    transition: .4s;
+    -moz-transition: .4s; /* Firefox 4 */
+    -webkit-transition: .4s; /* Safari and Chrome */
+    
+}
+.header2
+{
+    background-color:white;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 111100;
+    
+}
+
+
+.line{
+    width: 112px;
+    border-bottom: 2px solid;
+    border-color: whitesmoke;
+    margin-left: 4%;
+    // margin-top: -1%;
+
+    }
+
+.text234
+{
+    color: whitesmoke;
+    margin-top: -2.5%;
+    margin-left: 130px;
+    // font-size: 20px;
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.text1, .text1:focus
+{
+    color: whitesmoke;
+}
+.text_1, .text_1:focus
+{
+    color: color($colors, theme);
+    float: right;
+    font-size: 14px;
+}
+.text
+{
+    color: whitesmoke;
+    margin-top: -3%;
+    margin-left: 4%;
+    font-size: 20px;
+    font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.text2
+{
+    color: color($colors, theme);
+}
+.text22
+{
+    color: color($colors, theme);
+    margin-top: -3%;
+    margin-left: 4%;
+    font-size: 20px;
+    font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.backbutton
+{
+    color:#232526;
+}
+.segment
+{
+    background-color: #232526;
+    width: 100%;
+    z-index: 1100;
+    position: fixed;
+    left:0;
+    margin-top:-20px;
+}
+.segmenticon 
+{
+    color: color($colors, theme);
+}
+
+
+
+
+
+.headnonsearch
+{
+    background-color: color($colors, theme);
+    // height: 100%;
+    width: 100%;
+    z-index: 100;
+    position: relative;
+    padding-bottom: 2%;
+
+}
+.searchbar
+{
+    // margin-top:-2%;
+    z-index: 10;
+    // height: 100%;
+    // width: 100%;
+    transition: .2s;
+    -moz-transition: .2s; /* Firefox 4 */
+    -webkit-transition: .2s; /* Safari and Chrome */
+
+}
+.sbar
+{
+    z-index: 10;
+
+    display: block;
+}
+.searchbar-input {
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 90px !important;
+    // height: 30px !important ;
+    background-color: #dbdada !important;
+}
+// .searchbar-search-icon
+// {
+//     margin-top:-2%;
+// }
+.searchbar
+{
+    border-radius: 6px;
+}
+
+
+.textheadedit
+{
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin: 12px 0;
+    font-size: 22px;
+    font: bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.textheadeditchild
+{
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: -14px;
+}
+.textheadeditchild1
+{
+    color: white;
+    margin-left: 4%;
+    vertical-align: middle;
+    margin-top: -14px;
+}
+.textheadeditchild2
+{
+    color: color($colors, theme);
+    margin-left: 4%;
+    vertical-align: middle;
+    margin-top: -14px;
+}
+
+// -------------------------- CSS FAB BUTTON FILTER DIV NORMAL ------------------------------------------
+button[ion-fab] {
+    overflow: visible;
+    position: relative;
+
+    ion-label {
+        position: absolute;
+        top: -8px;
+        right: 50px;
+
+        color: white;
+        background-color: rgba(0,0,0,0.7);
+        line-height: 24px;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+    contain: layout;
+}
+
+.fabmenu,  .fabmenu:focus
+{
+    background-color: #232526;
+    color: color($colors, theme);
+    box-shadow: none;
+
+}
+.fabmenu:hover
+{
+    background-color: color($colors, theme);
+    box-shadow: none;
+    color: black;
+}
+.fab ion-icon
+{
+    margin-top: 7%;
+}
+
+.fabfilter
+{
+    background-color: #232526;
+    color: color($colors, theme);
+}
+.fab:hover
+{
+    background-color: color($colors, theme);
+    color: #232526;
+}
+
+.fabfileterlisticon:focus
+{  
+    .laball
+    {
+       background-color: white;
+       color: #232526;
+       border: 1px solid #232526; 
+    }
+    .lab1
+    {
+        background-color:#ff4444 ;
+        color: #232526;
+    }
+    .lab2
+    {
+        background-color:#ffbb33 ;
+        color: #232526;
+    }
+    .lab3
+    {
+        background-color:#feef6d;
+        color: #232526;
+    }
+    .lab4
+    {
+        background-color:#33b5e5 ;
+        color: #232526;
+    }
+    .lab5
+    {
+        background-color:#00c581 ;
+        color: #232526;
+    }
+    .lab6
+    {
+        background-color:#232526 ;
+        color:white ;
+    }
+}
+
+// ------------------------------------ CSS LIST MODE NORMAL -----------------------------------------------
+
+.divlist
+{
+    margin-top:130px !important;
+}
+.bottomspace
+{
+    height: 30px;
+    width: 100%;
+}
+.status_all
+{
+    height: 70%;
+    width: 100%;
+}
+.dataisnull
+{
+    padding-top:20% !important;
+}
+.dataisnullimage
+{
+    text-align: center;
+    height:160px;
+    margin:0 auto;
+    display: block;
+    overflow-y: hidden !important
+}
+.dataisnulltext
+{
+    text-align: center;
+    font: 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(156, 156, 156);
+}
+
+
+.nokonsumen
+{
+    font: bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 14px;
+  height:25px;
+  margin: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 11px;
+}
+
+.button1
+{
+    background-color: color($colors, theme);
+}
+
+// =================================================================================================
+// =================================================================================================
+
+    .wrapperx {
+        width: auto;
+        height: auto;
+    }
+
+    .sstatus {
+        position: fixed;
+        top: 190px;
+        left: -50px;
+        bottom: 90px;
+        width: 100px;
+        overflow-y: scroll;
+        border-radius: 30%;
+        }
+
+    .sstatus2 {
+        position: fixed;
+        top: 190px;
+        right: 0px;
+        bottom: 90px;
+        width: 120px;
+        overflow-y: scroll;
+        background-color: transparent;
+        // border-radius: 30%;
+        }
+  
+    .circlex {
+        width: 60px;
+        height: 60px;
+        background: #00000000;
+        border-radius: 100px;
+        position: relative;
+        // margin: 20px auto;
+        -webkit-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+        -moz-box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+        box-shadow: 6px 7px 13px -5px rgba(0,0,0,0.88);
+        transition: 0.3s;
+    }
+    .circley {
+        width: 60px;
+        height: 60px;
+        background: #00000000;
+        border-radius: 100px;
+        // position: relative;
+        margin: 5px auto;
+
+    }
+
+    .circlex:hover
+    {
+
+        box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+        transform: translateY(-0.25em);
+        -webkit-box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.94);
+        -moz-box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.94);
+        box-shadow: 10px 10px 31px -8px rgba(0,0,0,0.94);
+
+    }
+    
+    .textx {
+        font: bold 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        color: whitesmoke;
+        font-size: 11px;
+    }
+
+    .texty {
+        font: bold 54px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        writing-mode: tb-rl;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        color: whitesmoke;
+        font-size: 23px;
+    }
+
+    .textyy {
+
+        position: absolute;
+        top: 0;
+        right:  10%;
+        // margin: 0;
+        
+    }
+
+
+    .vertical-linex {
+        width: 2px;
+        height: 20px;
+        background:#232526;
+        margin: 5px auto 0 auto;
+    }
+
+    .rowx
+    {
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+// =================================================================================================
+// =================================================================================================
+  .closeicon
+  {
+    right: 2%; 
+    top: 1%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  .ciicon
+  {
+    font-size: 25px;
+
+  }
+    .status_header
+    {
+        font: bold 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 49px;
+        text-align: center;
+        height: 40px;
+        width: 180px;
+        background-color: #ff4444;
+        color: #232526;
+        border-radius: 100px;
+        margin: 0 auto;
+    }
+    .status_header2
+    {
+        font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 34px;
+        text-align: center;
+        height: 30px;
+        width: 100%;
+        background-color: #ff4444;
+        color: #232526;
+        border-radius: 100px;
+        margin: 0 auto;
+        margin-top: -8px;
+    }
+    .dd_id
+    {
+        font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: center;
+        margin-top:5px;
+    }
+
+    .inputdisable
+    {
+      pointer-events:none;
+      ::-webkit-input-placeholder
+      {
+        color: black;
+        opacity: 1;
+      }
+    }
+
+// =================================================================================================
+// =================================================================================================
+
+    .detailpembayaran
+    {
+        width:      100%;
+        height:     100%;
+    }
+    .buttonx, .buttonx:focus
+    {
+        background-color: color($colors, theme);
+    }
+    .detailpembayaran2
+    {
+
+        background: white; 
+        width:      100%;
+        height:     150%; 
+        z-index:    10000;
+        top:        0; 
+        left:       0;
+        position:   fixed; 
+    }
+    .carddetailpembayaran
+    {
+        margin-top:5px;
+        // overflow-y: scroll !important
+    }
+    .grandtotal
+    {
+        text-align: center;
+        font-size: 18px;
+        color: grey;
+    }
+    .totalprices
+    {
+        background-color: color($colors, theme);
+        color: white;
+        text-align: center;
+        font: 15px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .rowtotalprices
+    {
+        padding-top:10px;
+        padding-bottom:10px;  
+    }
+
+// =================================================================================================
+// ============================== divdetailpembayaran ==============================================
+.walink{
+    text-decoration: none;
+    color: #00c581;
+    
+}
+.divdetailpembayaran
+{
+        background: #ffffff; 
+        width:      100%;
+        height:     200%; 
+        z-index:    10000;
+        display: inline-table;
+        position:   fixed; 
+        top: 0; right: 0; bottom: 0; left: 0;
+        transform: none;
+}
+
+
+
+}

@@ -1,0 +1,66 @@
+
+<ion-content scrollbar-y-auto class="conten">
+    <ion-row style="margin-top:40px">
+        <ion-col text-center>
+          <img height="100px" src="../assets/imgs/su.png" />
+        </ion-col>
+    </ion-row>
+
+<div class="menu">
+    <ion-grid>
+        <ion-row>
+          <ion-col text-center  >
+            <div class="menu1">
+              <button class="b1" (click)="arsipkonsumen()">
+                  <ion-icon class="iconc1" name="ios-paper-outline"></ion-icon>
+                  <p class="textc1">Consumer Archive</p>
+              </button>
+            </div>
+          </ion-col>
+          <ion-col text-center  >
+            <div class="menu2">
+              <button class="b1" (click)="rekappembayaran()">
+                <ion-icon class="iconc2" name="ios-trending-up-outline"></ion-icon>
+                <p class="textc2">Financial Report</p>
+              </button>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center  >
+              <div class="menu3">
+                <button class="b1" (click)="pricelist()">
+                    <ion-icon class="iconc3" name="ios-paper-outline"></ion-icon>
+                    <p class="textc3">Price List</p>
+                </button>
+              </div>
+            </ion-col>
+            <ion-col text-center  >
+                
+              <div class="menu4">
+                <button class="b1" (click)="bookingpage(datakonsumen)" >
+                    <ion-icon class="iconc4" name="ios-create-outline"></ion-icon>
+                    <p class="textc4">Booking Service</p>
+                    <ion-badge *ngIf="dataisnull == false" class="badge" item-end>{{booknumber}}</ion-badge>  
+                </button>
+              </div>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+
+     
+
+  </div>
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+

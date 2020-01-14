@@ -1,0 +1,148 @@
+page-addtask {
+
+// ---------------------------------------------------------------------------------------------
+
+$size: 50%;
+.header
+{
+    background-color: color($colors, theme);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 100;
+    border-bottom-left-radius: $size * 2;
+    border-bottom-right-radius: $size * 2;
+    -webkit-box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+    -moz-box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+    box-shadow: 0px 17px 40px -16px rgba(0,0,0,0.67);
+}
+
+.header1
+{
+    background-color:color($colors, theme);
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left:0;
+    z-index: 111100;
+    
+}
+.line{
+    width: 112px;
+    border-bottom: 2px solid;
+    border-color: whitesmoke;
+    margin-left: 4%;
+    margin-top:-1%;
+
+    }
+.text1, .text1:focus
+{
+    color: whitesmoke;
+}
+.text
+{
+    color: whitesmoke;
+    margin-top: -3%;
+    margin-left: 4%;
+    font-size: 20px;
+    font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.text2
+{
+    color: whitesmoke;
+    margin-top: -2.5%;
+    margin-left: 130px;
+    // font-size: 20px;
+    font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.conten
+{
+    ::-webkit-scrollbar{
+        display:none;
+        }
+    // height: 100%;
+}
+.form
+{
+    margin-top:120px !important;
+}
+.rincian
+{
+    text-align: center;
+    font-size: 14px;
+    color: grey;
+}
+.textheadedit
+{
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin: 12px 0;
+    font-size: 20px;
+    font: bold 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.bottomspace
+{
+    height: 50px;
+    width: 100%;
+}
+
+// ---------------------------------------------------------------------------------------------
+
+.button1, .button2, .button1:focus, .button2:focus
+{
+    color: white;
+    width:28%;
+    background-color: color($colors, theme);
+}
+.button1:hover .button2:hover
+{
+    color: #232526;
+
+}
+
+// ---------------------------------------------------------------------------------------------
+.fabmenu,  .fabmenu:focus
+{
+    background-color: #232526;
+    color: color($colors, theme); 
+    box-shadow: none;
+
+}
+.fabmenu:hover
+{
+    background-color: color($colors, theme);
+    box-shadow: none;
+    color: black;
+}
+
+// ----------------------------------------------------------------------
+
+.segment
+{
+    background-color: #232526;
+    width: 100%;
+    z-index: 1100;
+    position: fixed;
+    left:0;
+    margin-top:-4%;
+}
+.segmenticon 
+{
+    color: color($colors, theme);
+}
+
+.buttonx, .buttonx:focus
+{
+    background-color: color($colors, theme);
+}
+
+
+
+}
+
